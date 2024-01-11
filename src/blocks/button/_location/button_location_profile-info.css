@@ -1,0 +1,10 @@
+.button_location_profile-info {
+  align-self: center;
+  grid-area: button;
+}
+
+@media screen and (max-width: 896px) {
+  .button_location_profile-info {
+    align-self: end;
+  }
+}

@@ -1,0 +1,8 @@
+.form__input-set {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 60px;
+  display: grid;
+  grid-template-rows: 26px 1fr;
+}

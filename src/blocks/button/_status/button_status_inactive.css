@@ -1,0 +1,10 @@
+.button_status_inactive {
+  background: none;
+  border: 1px solid #ccc;
+  color: #ccc;
+  pointer-events: none;
+}
+
+.button_status_inactive:hover {
+  opacity: 1;
+}

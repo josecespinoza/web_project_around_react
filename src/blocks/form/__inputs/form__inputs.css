@@ -1,0 +1,9 @@
+.form__inputs {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 11px;
+  width: 100%;
+}
