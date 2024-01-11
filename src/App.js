@@ -1,48 +1,17 @@
 import "./index.css";
-import logo from "./images/logo.svg";
-console.log(logo);
+import Header from "./components/Header/Header";
+import Profile from "./components/Profile/Profile";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
+
 function App() {
   return (
     <div className="page page_theme_dark">
-      <header className="header page__header">
-        <img
-          id="image-logo"
-          className="header__logo"
-          src={logo}
-          alt=" Around the U.S. logo"
-        />
-        <div className="header__division"></div>
-      </header>
-      <section className="profile page__profile">
-        <div className="profile__avatar-mask">
-          <button className="button button_theme_dark button_action_edit button_location_profile-avatar">
-            <span className="button__icon button__icon_action_edit button__icon_location-profile-avatar"></span>
-          </button>
-          <img
-            id="image-avatar"
-            className="profile__avatar"
-            alt="Profile avatar"
-          />
-        </div>
-        <div className="profile__info">
-          <h1 className="profile__name"></h1>
-          <h2 className="profile__occupation"></h2>
-          <button className="button button_theme_dark button_action_edit button_location_profile-info">
-            <span className="button__icon button__icon_action_edit"></span>
-          </button>
-        </div>
-        <div className="profile__options">
-          <button className="button button_theme_dark button_action_add button_location_profile">
-            <span className="button__icon button__icon_action_add"></span>
-          </button>
-        </div>
-      </section>
-      <main className="destinations page__destinations">
-        <ul className="destinations__list"></ul>
-      </main>
-      <footer className="footer">
-        <p className="footer__copyright">&copy; 2023 Jos&eacute; Espinoza</p>
-      </footer>
+      <Header></Header>
+      <Profile></Profile>
+      <Main></Main>
+      <Footer></Footer>
+      {/*
       <template id="destinations__item-template">
         <li className="destinations__item">
           <div className="destination">
@@ -63,7 +32,7 @@ function App() {
         </li>
       </template>
       <template id="modal-template">
-        <div className="modal-container" tabindex="10">
+        <div className="modal-container" tabIndex="10">
           <div className="modal-container__content"></div>
           <div className="modal-container__close-button">
             <button className="button button_theme_dark button_action_close">
@@ -80,7 +49,7 @@ function App() {
         </div>
       </template>
       <template id="popup-template">
-        <div className="popup" tabindex="10">
+        <div className="popup" tabIndex="10">
           <div className="popup__content"></div>
           <div className="popup__close-button">
             <button className="button button_theme_dark button_action_close">
@@ -95,7 +64,7 @@ function App() {
         <p className="popup__description"></p>
       </template>
       <template id="form-template">
-        <form className="form form_theme_dark" novalidate>
+        <form className="form form_theme_dark" noValidate>
           <h2 className="form__title"></h2>
           <div className="form__inputs"></div>
           <button className="button button_theme_light button_action_save button_location_form">
@@ -110,13 +79,14 @@ function App() {
             type=""
             name=""
             placeholder=""
-            maxlength=""
-            minlength=""
+            maxLength=""
+            minLength=""
             required={false}
           />
           <span className="form__input-error"></span>
         </fieldset>
       </template>
+      */}
     </div>
   );
 }
