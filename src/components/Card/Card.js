@@ -1,9 +1,17 @@
 import React from "react";
 
-function Card({ name, imageLink, onClick }) {
+function Card({ name, imageLink, onCardClick }) {
+  function handleClick() {
+    onCardClick({ name, imageLink });
+  }
+
   return (
     <div className="destination">
-      <img className="destination__photo" src={imageLink} onClick={onClick} />
+      <img
+        className="destination__photo"
+        src={imageLink}
+        onClick={handleClick}
+      />
       <button className="button button_theme_dark button_action_delete button_location_destination-photo">
         <span className="button__icon button__icon_action_delete"></span>
       </button>
