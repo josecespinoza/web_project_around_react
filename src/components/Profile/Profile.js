@@ -6,7 +6,7 @@ import Form from "../Form/Form";
 function Profile() {
   const [isFormOpened, setIsFormOpened] = React.useState(false);
 
-  function handleClick() {
+  function handleEditProfileClick() {
     setIsFormOpened(true);
   }
 
@@ -32,7 +32,7 @@ function Profile() {
           <h2 className="profile__occupation"></h2>
           <button
             className="button button_theme_dark button_action_edit button_location_profile-info"
-            onClick={handleClick}
+            onClick={handleEditProfileClick}
           >
             <span className="button__icon button__icon_action_edit"></span>
           </button>
