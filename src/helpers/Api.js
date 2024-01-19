@@ -60,7 +60,6 @@ class Api {
 
   #doRequest() {
     const requestOptions = this.#buildRequestOptions();
-    console.log(requestOptions);
     return fetch(
       `${this.#address}/${this.#groupId}/${this.#resource}`,
       requestOptions

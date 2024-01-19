@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useRef } from "react";
 
 function Popup({ children, onClose, type }) {
   const [isOpened, setIsOpened] = React.useState(true);
+  const ref = React.useRef();
 
-  /*   React.useEffect(() => {
-    return console.log("cleaned");
-  }); */
+  React.useEffect(() => {
+    ref.current.focus();
+  }, []);
 
-  function handleClose() {
+  function isCloseEvent(evt) {
+    return (
+      evt.key?.toLowerCase() === "escape" || evt.type.toLowerCase() === "click"
+    );
+  }
+
+  function handleClose(evt) {
+    if (!isCloseEvent(evt)) {
+      return;
+    }
     setIsOpened(false);
-    onClose();
+    setTimeout(() => {
+      onClose();
+    }, 300);
   }
 
   return (
     <div
+      ref={ref}
       className={`popup popup_state_${isOpened ? "opened" : "closed"}`}
       tabIndex="10"
+      onKeyUp={handleClose}
     >
       <div className={`popup__content popup__content_type_${type}`}>
         {children}
@@ -28,7 +42,7 @@ function Popup({ children, onClose, type }) {
           <span className="button__icon button__icon_action_close"></span>
         </button>
       </div>
-      <div className="popup__backdrop"></div>
+      <div className="popup__backdrop" onClick={handleClose}></div>
     </div>
   );
 }
