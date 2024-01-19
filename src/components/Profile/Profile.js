@@ -1,17 +1,27 @@
 import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import InputSet from "../InputSet/InputSet";
-import Form from "../Form/Form";
+import ProfileForm from "../ProfileForm/ProfileForm";
+import AddCardForm from "../AddCardForm/AddCardForm";
 
 function Profile() {
-  const [isFormOpened, setIsFormOpened] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
 
   function handleEditProfileClick() {
-    setIsFormOpened(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleFormClose() {
-    setIsFormOpened(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
+
+  //handleEditAvatarClick;
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
   }
 
   return (
@@ -38,31 +48,22 @@ function Profile() {
           </button>
         </div>
         <div className="profile__options">
-          <button className="button button_theme_dark button_action_add button_location_profile">
+          <button
+            className="button button_theme_dark button_action_add button_location_profile"
+            onClick={handleAddPlaceClick}
+          >
             <span className="button__icon button__icon_action_add"></span>
           </button>
         </div>
       </section>
-      {isFormOpened && (
+      {isEditProfilePopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
-          <Form title="Editar Perfil">
-            <InputSet
-              type="text"
-              name="name"
-              placeholder="Nombre"
-              maxLength="40"
-              minLength="2"
-              required={true}
-            ></InputSet>
-            <InputSet
-              type="text"
-              name="aboutMe"
-              placeholder="Acerca de mí"
-              maxLength="200"
-              minLength="2"
-              required={true}
-            ></InputSet>
-          </Form>
+          <ProfileForm></ProfileForm>
+        </PopupWithForm>
+      )}
+      {isAddPlacePopupOpen && (
+        <PopupWithForm onClose={handleFormClose}>
+          <AddCardForm></AddCardForm>
         </PopupWithForm>
       )}
     </>
