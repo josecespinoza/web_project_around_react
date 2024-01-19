@@ -2,13 +2,22 @@ import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import AddCardForm from "../AddCardForm/AddCardForm";
+import { api } from "../../utils/api";
 
 function Profile() {
+  const [userInfo, setUserInfo] = React.useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
+
+  React.useEffect(() => {
+    api.configRequest({ resource: "users/me" });
+    api.get().then((res) => {
+      setUserInfo(res);
+    });
+  }, []);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -42,11 +51,12 @@ function Profile() {
             id="image-avatar"
             className="profile__avatar"
             alt="Profile avatar"
+            src={userInfo.avatar}
           />
         </div>
         <div className="profile__info">
-          <h1 className="profile__name"></h1>
-          <h2 className="profile__occupation"></h2>
+          <h1 className="profile__name">{userInfo.name}</h1>
+          <h2 className="profile__occupation">{userInfo.about}</h2>
           <button
             className="button button_theme_dark button_action_edit button_location_profile-info"
             onClick={handleEditProfileClick}

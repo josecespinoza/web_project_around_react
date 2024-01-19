@@ -9,7 +9,7 @@ function Main() {
   const [isCardPopupOpened, setIsCardPopupOpened] = React.useState(false);
 
   React.useEffect(() => {
-    api.configRequest("cards");
+    api.configRequest({ resource: "cards" });
     api.get().then((res) => {
       setCards(res);
     });

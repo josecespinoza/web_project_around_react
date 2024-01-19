@@ -24,7 +24,7 @@ class Api {
     this.#method = method;
   }
 
-  configRequest(resource, body = null) {
+  configRequest({ resource, body = null }) {
     this.#resource = resource;
     body && (this.#body = body);
   }
