@@ -17,9 +17,13 @@ function Profile() {
   function handleFormClose() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
   }
 
-  //handleEditAvatarClick;
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
@@ -28,7 +32,10 @@ function Profile() {
     <>
       <section className="profile page__profile">
         <div className="profile__avatar-mask">
-          <button className="button button_theme_dark button_action_edit button_location_profile-avatar">
+          <button
+            className="button button_theme_dark button_action_edit button_location_profile-avatar"
+            onClick={handleEditAvatarClick}
+          >
             <span className="button__icon button__icon_action_edit button__icon_location-profile-avatar"></span>
           </button>
           <img
@@ -62,6 +69,11 @@ function Profile() {
         </PopupWithForm>
       )}
       {isAddPlacePopupOpen && (
+        <PopupWithForm onClose={handleFormClose}>
+          <AddCardForm></AddCardForm>
+        </PopupWithForm>
+      )}
+      {isEditAvatarPopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
           <AddCardForm></AddCardForm>
         </PopupWithForm>
