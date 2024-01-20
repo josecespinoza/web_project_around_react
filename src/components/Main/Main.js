@@ -25,7 +25,7 @@ function Main() {
   }
 
   function handlePopupCardClose() {
-    setIsCardPopupOpened(true);
+    setIsCardPopupOpened(false);
   }
 
   function handleAddCard(newCard) {
