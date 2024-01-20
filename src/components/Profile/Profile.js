@@ -1,11 +1,11 @@
 import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import ProfileForm from "./ProfileForm";
-import AddCardForm from "../AddCardForm/AddCardForm";
+import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../../utils/api";
 
-function Profile() {
+function Profile({ onAddCardSubmit }) {
   const [userInfo, setUserInfo] = React.useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
@@ -30,9 +30,13 @@ function Profile() {
   }
 
   function handleEditAvatarSubmit(submitRes) {
-    debugger;
     handleFormClose();
     setUserInfo(submitRes);
+  }
+
+  function handleAddCardSubmit(submitRes) {
+    handleFormClose();
+    onAddCardSubmit(submitRes);
   }
 
   function handleFormClose() {
@@ -92,7 +96,7 @@ function Profile() {
       )}
       {isAddPlacePopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
-          <AddCardForm></AddCardForm>
+          <AddCardForm onSubmit={handleAddCardSubmit}></AddCardForm>
         </PopupWithForm>
       )}
       {isEditAvatarPopupOpen && (

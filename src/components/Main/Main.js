@@ -2,6 +2,7 @@ import React from "react";
 import { api } from "../../utils/api";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
+import Profile from "../Profile/Profile";
 
 function Main() {
   const [cards, setCards] = React.useState([]);
@@ -24,11 +25,16 @@ function Main() {
   }
 
   function handlePopupCardClose() {
-    setIsCardPopupOpened(false);
+    setIsCardPopupOpened(true);
+  }
+
+  function handleAddCard(newCard) {
+    setCards((prevCards) => [newCard].concat([...prevCards]));
   }
 
   return (
     <>
+      <Profile onAddCardSubmit={handleAddCard}></Profile>
       <main className="destinations page__destinations">
         <ul className="destinations__list">
           {cards.map((card, i) => (

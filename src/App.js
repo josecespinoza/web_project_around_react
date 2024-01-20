@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="page page_theme_dark">
       <Header></Header>
-      <Profile></Profile>
+
       <Main></Main>
       <Footer></Footer>
       {/*
