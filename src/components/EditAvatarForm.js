@@ -1,5 +1,5 @@
-import InputSet from "../InputSet/InputSet";
-import Form from "../Form/Form";
+import InputSet from "./InputSet/InputSet";
+import Form from "./Form/Form";
 
 function EditAvatarForm() {
   return (

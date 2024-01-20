@@ -2,6 +2,7 @@ import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import AddCardForm from "../AddCardForm/AddCardForm";
+import EditAvatarForm from "../EditAvatarForm";
 import { api } from "../../utils/api";
 
 function Profile() {
@@ -21,6 +22,11 @@ function Profile() {
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
+  }
+
+  function handleEditProfileSubmit(submitRes) {
+    handleFormClose();
+    setUserInfo(submitRes);
   }
 
   function handleFormClose() {
@@ -75,7 +81,7 @@ function Profile() {
       </section>
       {isEditProfilePopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
-          <ProfileForm></ProfileForm>
+          <ProfileForm onSubmit={handleEditProfileSubmit}></ProfileForm>
         </PopupWithForm>
       )}
       {isAddPlacePopupOpen && (
@@ -85,7 +91,7 @@ function Profile() {
       )}
       {isEditAvatarPopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
-          <AddCardForm></AddCardForm>
+          <EditAvatarForm></EditAvatarForm>
         </PopupWithForm>
       )}
     </>
