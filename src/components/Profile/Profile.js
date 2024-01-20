@@ -1,8 +1,8 @@
 import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import ProfileForm from "../ProfileForm/ProfileForm";
+import ProfileForm from "./ProfileForm";
 import AddCardForm from "../AddCardForm/AddCardForm";
-import EditAvatarForm from "../EditAvatarForm";
+import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../../utils/api";
 
 function Profile() {
@@ -25,6 +25,12 @@ function Profile() {
   }
 
   function handleEditProfileSubmit(submitRes) {
+    handleFormClose();
+    setUserInfo(submitRes);
+  }
+
+  function handleEditAvatarSubmit(submitRes) {
+    debugger;
     handleFormClose();
     setUserInfo(submitRes);
   }
@@ -91,7 +97,7 @@ function Profile() {
       )}
       {isEditAvatarPopupOpen && (
         <PopupWithForm onClose={handleFormClose}>
-          <EditAvatarForm></EditAvatarForm>
+          <EditAvatarForm onSubmit={handleEditAvatarSubmit}></EditAvatarForm>
         </PopupWithForm>
       )}
     </>
