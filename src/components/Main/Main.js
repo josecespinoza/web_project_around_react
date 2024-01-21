@@ -3,11 +3,14 @@ import { api } from "../../utils/api";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
 import Profile from "../Profile/Profile";
+import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import CardDeleteForm from "../Card/CardDeleteForm";
 
 function Main() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [isCardPopupOpened, setIsCardPopupOpened] = React.useState(false);
+  const [isCardDeleteOpened, setIsCardDeleteOpened] = React.useState(false);
 
   React.useEffect(() => {
     api.configRequest({ resource: "cards" });
@@ -27,21 +30,28 @@ function Main() {
 
   function handlePopupCardClose() {
     setIsCardPopupOpened(false);
+    setIsCardDeleteOpened(false);
   }
 
   function handleAddCard(newCard) {
     setCards((prevCards) => [newCard].concat([...prevCards]));
   }
 
-  function handleCardDelete(cardId) {
+  function handleCardDeleteSubmit() {
     api.configRequest({
-      resource: `/cards/${cardId}`,
+      resource: `/cards/${selectedCard.id}`,
     });
     api.delete().then((res) => {
-      setCards((prevCards) => {
-        return prevCards.filter((card) => card._id != cardId);
-      });
+      setCards((prevCards) =>
+        prevCards.filter((card) => card._id != selectedCard.id)
+      );
+      setIsCardDeleteOpened(false);
     });
+  }
+
+  function handleCardDeleteClick(cardId) {
+    setIsCardDeleteOpened(true);
+    setSelectedCard({ id: cardId });
   }
 
   function handleCardLike(cardId, isLiked) {
@@ -91,7 +101,7 @@ function Main() {
                 cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
-                onDelete={handleCardDelete}
+                onDeleteClick={handleCardDeleteClick}
               ></Card>
             </li>
           ))}
@@ -103,6 +113,11 @@ function Main() {
           name={selectedCard.name}
           imageLink={selectedCard.imageLink}
         ></ImagePopup>
+      )}
+      {isCardDeleteOpened && (
+        <PopupWithForm onClose={handlePopupCardClose}>
+          <CardDeleteForm onSubmit={handleCardDeleteSubmit}></CardDeleteForm>
+        </PopupWithForm>
       )}
     </>
   );

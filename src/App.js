@@ -9,18 +9,6 @@ function App() {
       <Header></Header>
       <Main></Main>
       <Footer></Footer>
-      {/*
-      <template id="destination-popup-template">
-        <div className="destination-popup">
-          <img className="destination-popup__photo" />
-          <p className="destination-popup__description"></p>
-        </div>
-      </template>
-      <template id="popupImage-template">
-        <img className="popup__photo" />
-        <p className="popup__description"></p>
-      </template>
-      */}
     </div>
   );
 }

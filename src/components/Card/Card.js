@@ -8,7 +8,7 @@ function Card({
   likesCounter,
   onCardClick,
   onLike,
-  onDelete,
+  onDeleteClick,
 }) {
   function handleClick() {
     onCardClick({ name, imageLink });
@@ -19,7 +19,7 @@ function Card({
   }
 
   function handleDelete() {
-    onDelete(id);
+    onDeleteClick(id);
   }
 
   return (
