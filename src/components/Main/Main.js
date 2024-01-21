@@ -32,20 +32,36 @@ function Main() {
     setCards((prevCards) => [newCard].concat([...prevCards]));
   }
 
-  function handleCardLike(cardId) {
-    api.configRequest({
-      resource: `/cards/likes/${cardId}`,
-    });
-    api.put().then((newLikedCard) => {
-      setCards((prevCards) => {
-        return prevCards.map((card) => {
-          if (card._id === newLikedCard._id) {
-            return newLikedCard;
-          }
-          return card;
+  function handleCardLike(cardId, isLiked) {
+    if (!isLiked) {
+      api.configRequest({
+        resource: `/cards/likes/${cardId}`,
+      });
+      api.put().then((newLikedCard) => {
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            if (card._id === newLikedCard._id) {
+              return newLikedCard;
+            }
+            return card;
+          });
         });
       });
-    });
+    } else {
+      api.configRequest({
+        resource: `/cards/likes/${cardId}`,
+      });
+      api.delete().then((newLikedCard) => {
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            if (card._id === newLikedCard._id) {
+              return newLikedCard;
+            }
+            return card;
+          });
+        });
+      });
+    }
   }
 
   return (

@@ -14,7 +14,7 @@ function Card({
   }
 
   function handleLike() {
-    onLike(id);
+    onLike(id, cardIsLiked);
   }
 
   return (
