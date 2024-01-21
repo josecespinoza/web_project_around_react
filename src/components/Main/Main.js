@@ -6,7 +6,7 @@ import Profile from "../Profile/Profile";
 
 function Main() {
   const [cards, setCards] = React.useState([]);
-  const [openedCard, setOpenedCard] = React.useState({});
+  const [selectedCard, setSelectedCard] = React.useState({});
   const [isCardPopupOpened, setIsCardPopupOpened] = React.useState(false);
 
   React.useEffect(() => {
@@ -18,7 +18,7 @@ function Main() {
 
   function handleCardClick({ name, imageLink }) {
     setIsCardPopupOpened(true);
-    setOpenedCard({
+    setSelectedCard({
       name,
       imageLink,
     });
@@ -32,6 +32,22 @@ function Main() {
     setCards((prevCards) => [newCard].concat([...prevCards]));
   }
 
+  function handleCardLike(cardId) {
+    api.configRequest({
+      resource: `/cards/likes/${cardId}`,
+    });
+    api.put().then((newLikedCard) => {
+      setCards((prevCards) => {
+        return prevCards.map((card) => {
+          if (card._id === newLikedCard._id) {
+            return newLikedCard;
+          }
+          return card;
+        });
+      });
+    });
+  }
+
   return (
     <>
       <Profile onAddCardSubmit={handleAddCard}></Profile>
@@ -40,9 +56,13 @@ function Main() {
           {cards.map((card, i) => (
             <li key={i} className="destinations__item">
               <Card
+                id={card._id}
                 name={card.name}
                 imageLink={card.link}
                 onCardClick={handleCardClick}
+                cardIsLiked={card.likes.length > 0}
+                likesCounter={card.likes.length}
+                onLike={handleCardLike}
               ></Card>
             </li>
           ))}
@@ -51,8 +71,8 @@ function Main() {
       {isCardPopupOpened && (
         <ImagePopup
           onClose={handlePopupCardClose}
-          name={openedCard.name}
-          imageLink={openedCard.imageLink}
+          name={selectedCard.name}
+          imageLink={selectedCard.imageLink}
         ></ImagePopup>
       )}
     </>

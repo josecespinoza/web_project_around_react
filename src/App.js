@@ -1,6 +1,5 @@
 import "./index.css";
 import Header from "./components/Header/Header";
-import Profile from "./components/Profile/Profile";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 
@@ -8,7 +7,6 @@ function App() {
   return (
     <div className="page page_theme_dark">
       <Header></Header>
-
       <Main></Main>
       <Footer></Footer>
       {/*
