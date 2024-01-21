@@ -8,6 +8,7 @@ function Card({
   likesCounter,
   onCardClick,
   onLike,
+  onDelete,
 }) {
   function handleClick() {
     onCardClick({ name, imageLink });
@@ -17,6 +18,10 @@ function Card({
     onLike(id, cardIsLiked);
   }
 
+  function handleDelete() {
+    onDelete(id);
+  }
+
   return (
     <div className="destination">
       <img
@@ -24,7 +29,10 @@ function Card({
         src={imageLink}
         onClick={handleClick}
       />
-      <button className="button button_theme_dark button_action_delete button_location_destination-photo">
+      <button
+        className="button button_theme_dark button_action_delete button_location_destination-photo"
+        onClick={handleDelete}
+      >
         <span className="button__icon button__icon_action_delete"></span>
       </button>
       <div className="destination__info destination__info_theme_dark">

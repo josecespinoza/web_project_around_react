@@ -14,6 +14,7 @@ function Main() {
     api.get().then((res) => {
       setCards(res);
     });
+    console.log(cards);
   }, []);
 
   function handleCardClick({ name, imageLink }) {
@@ -30,6 +31,17 @@ function Main() {
 
   function handleAddCard(newCard) {
     setCards((prevCards) => [newCard].concat([...prevCards]));
+  }
+
+  function handleCardDelete(cardId) {
+    api.configRequest({
+      resource: `/cards/${cardId}`,
+    });
+    api.delete().then((res) => {
+      setCards((prevCards) => {
+        return prevCards.filter((card) => card._id != cardId);
+      });
+    });
   }
 
   function handleCardLike(cardId, isLiked) {
@@ -79,6 +91,7 @@ function Main() {
                 cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
+                onDelete={handleCardDelete}
               ></Card>
             </li>
           ))}
