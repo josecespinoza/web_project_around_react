@@ -1,19 +1,22 @@
-import React from "react";
+import { useState, useContext } from "react";
 import InputSet from "../InputSet/InputSet";
 import Form from "../Form/Form";
 import { api } from "../../utils/api";
+import { PopupWithFormContext } from "../Context/PopupWithFormContext";
 
-function EditAvatarForm({ onSubmit }) {
-  const [imageUrl, setImageUrl] = React.useState("");
+function EditAvatarForm() {
+  const [imageUrl, setImageUrl] = useState("");
 
-  function handleSubmit(evt) {
+  const handleSubmit = useContext(PopupWithFormContext);
+
+  function handleFormSubmit(evt) {
     evt.preventDefault();
     api.configRequest({
       resource: "/users/me/avatar",
       body: { avatar: imageUrl },
     });
     api.patch().then((res) => {
-      onSubmit(res);
+      handleSubmit(res);
     });
   }
 
@@ -25,7 +28,7 @@ function EditAvatarForm({ onSubmit }) {
     <Form
       title="Cambiar foto de perfil"
       buttonLabel="Guardar"
-      onFormSubmit={handleSubmit}
+      onFormSubmit={handleFormSubmit}
     >
       <InputSet
         type="url"

@@ -1,5 +1,6 @@
 function Form({ children, title, buttonLabel, onFormSubmit }) {
   function handleSubmit(evt) {
+    evt.preventDefault();
     onFormSubmit(evt);
   }
 

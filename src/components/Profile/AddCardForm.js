@@ -1,20 +1,23 @@
 import InputSet from "../InputSet/InputSet";
 import Form from "../Form/Form";
-import React from "react";
+import { useState, useContext } from "react";
 import { api } from "../../utils/api";
+import { PopupWithFormContext } from "../Context/PopupWithFormContext";
 
-function AddCardForm({ onSubmit }) {
-  const [title, setTitle] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState("");
+function AddCardForm() {
+  const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  function handleSubmit(evt) {
+  const handleSubmit = useContext(PopupWithFormContext);
+
+  function handleFormSubmit(evt) {
     evt.preventDefault();
     api.configRequest({
       resource: "/cards",
       body: { name: title, link: imageUrl },
     });
     api.post().then((res) => {
-      onSubmit(res);
+      handleSubmit(res);
     });
   }
 
@@ -24,7 +27,11 @@ function AddCardForm({ onSubmit }) {
   }
 
   return (
-    <Form title="Nuevo Lugar" buttonLabel="Guardar" onFormSubmit={handleSubmit}>
+    <Form
+      title="Nuevo Lugar"
+      buttonLabel="Guardar"
+      onFormSubmit={handleFormSubmit}
+    >
       <InputSet
         type="text"
         name="title"

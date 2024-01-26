@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
+import { useRef, useEffect } from "react";
 
-function Popup({ children, onClose, type }) {
-  const [isOpened, setIsOpened] = React.useState(true);
-  const ref = React.useRef();
+function Popup({ children, onClose, type, isOpen, afterClose = null }) {
+  const ref = useRef();
 
-  React.useEffect(() => {
+  useEffect(() => {
     ref.current.focus();
-  }, []);
+    !isOpen && closingAnimation();
+  }, [isOpen]);
 
   function isCloseEvent(evt) {
     return (
@@ -14,20 +14,24 @@ function Popup({ children, onClose, type }) {
     );
   }
 
+  //Will animate popup closing and trigger afterClose function
+  function closingAnimation() {
+    setTimeout(() => {
+      afterClose && afterClose();
+    }, 300);
+  }
+
   function handleClose(evt) {
     if (!isCloseEvent(evt)) {
       return;
     }
-    setIsOpened(false);
-    setTimeout(() => {
-      onClose();
-    }, 300);
+    onClose();
   }
 
   return (
     <div
       ref={ref}
-      className={`popup popup_state_${isOpened ? "opened" : "closed"}`}
+      className={`popup popup_state_${isOpen ? "opened" : "closed"}`}
       tabIndex="10"
       onKeyUp={handleClose}
     >

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import ProfileForm from "./ProfileForm";
 import AddCardForm from "./AddCardForm";
@@ -6,14 +6,12 @@ import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../../utils/api";
 
 function Profile({ onAddCardSubmit }) {
-  const [userInfo, setUserInfo] = React.useState({});
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api.configRequest({ resource: "users/me" });
     api.get().then((res) => {
       setUserInfo(res);
@@ -90,18 +88,24 @@ function Profile({ onAddCardSubmit }) {
         </div>
       </section>
       {isEditProfilePopupOpen && (
-        <PopupWithForm onClose={handleFormClose}>
-          <ProfileForm onSubmit={handleEditProfileSubmit}></ProfileForm>
+        <PopupWithForm
+          onSubmit={handleEditProfileSubmit}
+          onClose={handleFormClose}
+        >
+          <ProfileForm></ProfileForm>
         </PopupWithForm>
       )}
       {isAddPlacePopupOpen && (
-        <PopupWithForm onClose={handleFormClose}>
-          <AddCardForm onSubmit={handleAddCardSubmit}></AddCardForm>
+        <PopupWithForm onSubmit={handleAddCardSubmit} onClose={handleFormClose}>
+          <AddCardForm></AddCardForm>
         </PopupWithForm>
       )}
       {isEditAvatarPopupOpen && (
-        <PopupWithForm onClose={handleFormClose}>
-          <EditAvatarForm onSubmit={handleEditAvatarSubmit}></EditAvatarForm>
+        <PopupWithForm
+          onSubmit={handleEditAvatarSubmit}
+          onClose={handleFormClose}
+        >
+          <EditAvatarForm></EditAvatarForm>
         </PopupWithForm>
       )}
     </>

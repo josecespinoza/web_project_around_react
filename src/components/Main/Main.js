@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../utils/api";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
@@ -7,17 +7,16 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import CardDeleteForm from "../Card/CardDeleteForm";
 
 function Main() {
-  const [cards, setCards] = React.useState([]);
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [isCardPopupOpened, setIsCardPopupOpened] = React.useState(false);
-  const [isCardDeleteOpened, setIsCardDeleteOpened] = React.useState(false);
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
+  const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api.configRequest({ resource: "cards" });
     api.get().then((res) => {
       setCards(res);
     });
-    console.log(cards);
   }, []);
 
   function handleCardClick({ name, imageLink }) {
