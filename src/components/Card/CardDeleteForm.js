@@ -1,12 +1,15 @@
 import Form from "../Form/Form";
 import { PopupWithFormContext } from "../Context/PopupWithFormContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { api } from "../../utils/api";
 
 function CardDeleteForm({ cardId }) {
+  const [buttonLabel, setButtonLabel] = useState("Sí");
+
   const handleSubmit = useContext(PopupWithFormContext);
 
   function handleFormSubmit() {
+    setButtonLabel("Eliminando...");
     api.configRequest({
       resource: `/cards/${cardId}`,
     });
@@ -18,7 +21,7 @@ function CardDeleteForm({ cardId }) {
   return (
     <Form
       title="¿Estás seguro?"
-      buttonLabel="Sí"
+      buttonLabel={buttonLabel}
       onFormSubmit={handleFormSubmit}
     ></Form>
   );

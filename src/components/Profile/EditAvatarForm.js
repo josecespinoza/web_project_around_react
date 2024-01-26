@@ -6,11 +6,12 @@ import { PopupWithFormContext } from "../Context/PopupWithFormContext";
 
 function EditAvatarForm() {
   const [imageUrl, setImageUrl] = useState("");
+  const [buttonLabel, setButtonLabel] = useState("Guardar");
 
   const handleSubmit = useContext(PopupWithFormContext);
 
   function handleFormSubmit(evt) {
-    evt.preventDefault();
+    setButtonLabel("Guardando...");
     api.configRequest({
       resource: "/users/me/avatar",
       body: { avatar: imageUrl },
@@ -27,7 +28,7 @@ function EditAvatarForm() {
   return (
     <Form
       title="Cambiar foto de perfil"
-      buttonLabel="Guardar"
+      buttonLabel={buttonLabel}
       onFormSubmit={handleFormSubmit}
     >
       <InputSet

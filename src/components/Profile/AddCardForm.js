@@ -7,11 +7,12 @@ import { PopupWithFormContext } from "../Context/PopupWithFormContext";
 function AddCardForm() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [buttonLabel, setButtonLabel] = useState("Guardar");
 
   const handleSubmit = useContext(PopupWithFormContext);
 
   function handleFormSubmit(evt) {
-    evt.preventDefault();
+    setButtonLabel("Guardando...");
     api.configRequest({
       resource: "/cards",
       body: { name: title, link: imageUrl },
@@ -29,7 +30,7 @@ function AddCardForm() {
   return (
     <Form
       title="Nuevo Lugar"
-      buttonLabel="Guardar"
+      buttonLabel={buttonLabel}
       onFormSubmit={handleFormSubmit}
     >
       <InputSet
