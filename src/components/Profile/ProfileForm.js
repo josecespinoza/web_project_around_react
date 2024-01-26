@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import InputSet from "../InputSet/InputSet";
 import Form from "../Form/Form";
 import { api } from "../../utils/api";
@@ -7,11 +7,13 @@ import { PopupWithFormContext } from "../Context/PopupWithFormContext";
 function ProfileForm() {
   const [userName, setUserName] = useState("");
   const [aboutMe, setAboutMe] = useState("");
+  const [buttonLabel, setButtonLabel] = useState("Guardar");
 
   const handleSubmit = useContext(PopupWithFormContext);
 
   function handleFormSubmit(evt) {
     evt.preventDefault();
+    setButtonLabel("Guardando...");
     api.configRequest({
       resource: "users/me",
       body: { name: userName, about: aboutMe },
@@ -28,7 +30,7 @@ function ProfileForm() {
   return (
     <Form
       title="Editar Perfil"
-      buttonLabel="Guardar"
+      buttonLabel={buttonLabel}
       onFormSubmit={handleFormSubmit}
     >
       <InputSet
