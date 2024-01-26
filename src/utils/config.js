@@ -1,3 +1,12 @@
+const validationConfig = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".button_location_form",
+  inactiveButtonClass: "button_status_inactive",
+  inputErrorClass: "form__input_status_error",
+  errorClass: "form__input-error",
+};
+
 const apiConfig = {
   address: "https://around.nomoreparties.co/v1",
   groupId: "web_es_10",
@@ -13,4 +22,4 @@ const apiConfig = {
   deleteMethod: "DELETE",
 };
 
-export { apiConfig };
+export { apiConfig, validationConfig };
