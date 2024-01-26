@@ -17,9 +17,12 @@ function AddCardForm() {
       resource: "/cards",
       body: { name: title, link: imageUrl },
     });
-    api.post().then((res) => {
-      handleSubmit(res);
-    });
+    api
+      .post()
+      .then((res) => {
+        handleSubmit(res);
+      })
+      .catch(console.error("There was an error"));
   }
 
   function handleChange(inputName, inputValue) {

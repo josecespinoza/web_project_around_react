@@ -16,9 +16,12 @@ function EditAvatarForm() {
       resource: "/users/me/avatar",
       body: { avatar: imageUrl },
     });
-    api.patch().then((res) => {
-      handleSubmit(res);
-    });
+    api
+      .patch()
+      .then((res) => {
+        handleSubmit(res);
+      })
+      .catch(console.error("There was an error"));
   }
 
   function handleChange(inputName, inputValue) {

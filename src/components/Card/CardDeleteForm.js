@@ -13,9 +13,12 @@ function CardDeleteForm({ cardId }) {
     api.configRequest({
       resource: `/cards/${cardId}`,
     });
-    api.delete().then((res) => {
-      handleSubmit(cardId);
-    });
+    api
+      .delete()
+      .then((res) => {
+        handleSubmit(cardId);
+      })
+      .catch(console.error("There was an error"));
   }
 
   return (

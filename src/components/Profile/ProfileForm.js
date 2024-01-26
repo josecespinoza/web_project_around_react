@@ -12,15 +12,17 @@ function ProfileForm() {
   const handleSubmit = useContext(PopupWithFormContext);
 
   function handleFormSubmit(evt) {
-    evt.preventDefault();
     setButtonLabel("Guardando...");
     api.configRequest({
       resource: "users/me",
       body: { name: userName, about: aboutMe },
     });
-    api.patch().then((res) => {
-      handleSubmit(res);
-    });
+    api
+      .patch()
+      .then((res) => {
+        handleSubmit(res);
+      })
+      .catch(console.error("There was an error"));
   }
 
   function handleChange(inputName, inputValue) {
