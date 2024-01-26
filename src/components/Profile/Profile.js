@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import PopupWithForm from "../common/PopupWithForm";
 import ProfileForm from "./ProfileForm";
 import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";

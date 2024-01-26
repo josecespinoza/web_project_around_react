@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { api } from "../../utils/api";
-import Card from "../Card/Card";
-import ImagePopup from "../ImagePopup/ImagePopup";
-import Profile from "../Profile/Profile";
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import CardDeleteForm from "../Card/CardDeleteForm";
+import Card from "../cards/Card";
+import ImagePopup from "../common/ImagePopup";
+import Profile from "../profile/Profile";
+import PopupWithForm from "../common/PopupWithForm";
+import CardDeleteForm from "../cards/CardDeleteForm";
 
 function Main() {
   const [cards, setCards] = useState([]);

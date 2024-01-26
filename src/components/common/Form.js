@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import FormValidator from "../../helpers/FormValidator.js";
+import FormValidator from "../../helpers/FormValidator";
 
 function Form({ children, title, buttonLabel, onFormSubmit }) {
   const formRef = useRef();

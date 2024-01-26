@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Popup from "../Popup/Popup";
+import Popup from "./Popup";
 
 function ImagePopup({ name, imageLink, onClose }) {
   const [isOpen, setIsOpen] = useState(true);

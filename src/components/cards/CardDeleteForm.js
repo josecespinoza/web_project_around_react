@@ -1,5 +1,5 @@
-import Form from "../Form/Form";
-import { PopupWithFormContext } from "../Context/PopupWithFormContext";
+import Form from "../common/Form";
+import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
 import { useContext, useState } from "react";
 import { api } from "../../utils/api";
 

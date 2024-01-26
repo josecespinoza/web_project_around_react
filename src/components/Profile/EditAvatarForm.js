@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import InputSet from "../InputSet/InputSet";
-import Form from "../Form/Form";
+import InputSet from "../common/InputSet";
+import Form from "../common/Form";
 import { api } from "../../utils/api";
-import { PopupWithFormContext } from "../Context/PopupWithFormContext";
+import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
 
 function EditAvatarForm() {
   const [imageUrl, setImageUrl] = useState("");
