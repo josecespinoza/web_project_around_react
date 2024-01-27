@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Alrededor de los Estados Unidos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Descripción general
 
-## Available Scripts
+"Alrededor de los Estados Unidos" inicio como un proyecto en el cual se mostraban fotografías de sitios turísticos dentro de los estados unidos, sin embargo, ha sido construido de manera que estás fotografías puedan ser modificadas.
 
-In the project directory, you can run:
+Como ejemplo podrás encontrar imagenes de lugares turísticos de Europa, sin embargo, puedes agregar nuevas imágenes. Las imágenes solo podrán ser eliminadas por el usuario que las creó, sin embargo, actualmente la aplicación trabaja con un único usuario.
 
-### `npm start`
+### Tecnologías
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Podrás encontrar que en el proyecto se utilizaron las siguientes tecnologías:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- HTML
+- CSS
+- JavaScript
+- React
+- NodeJS
+- Webpack
 
-### `npm test`
+Asimismo, se soporta la minificación de las hojas de estilo y transpilación de los scripts para navegadores más antiguos (ver `babel.config.js`).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Se han utilizado las capacidades asincronas de JavaScript mediante el uso de `promises`, para el consumo del api `https://around.nomoreparties.co/v1/web_es_10`, la cual permite interactuar con la información del usuario y con las imágenes de los sitios turísticos.
 
-### `npm run build`
+-
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Organización
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Para la organización de los archivos CSS se utilizó la metodología BEM.
+- La aplicación se encuentra desarrollada con React, separando así la aplicación diversos componentes reutilizables para la aplicación.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ¿Cómo levantar el proyecto?
 
-### `npm run eject`
+Para iniciar el proyecto:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Instalar dependencias `npm install`;
+2. Ejecutar `npm start` para ejecutar de manera local, o `npm run build` para compilar la versión productiva.
+3. Se iniciará la aplicación en automático en el puerto `3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Aplicación en vivo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Puedes visitar la aplicación en vivo en https://josecespinoza.github.io/web_project_4_esp/
