@@ -11,6 +11,7 @@ function Main() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
   const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     api.configRequest({ resource: "cards" });
@@ -44,6 +45,10 @@ function Main() {
   function handleCardDelete(cardId) {
     setIsCardDeleteOpened(false);
     setCards((prevCards) => prevCards.filter((card) => card._id != cardId));
+  }
+
+  function handleUserLogin({ userId }) {
+    setUserId(userId);
   }
 
   function handleCardLike(cardId, isLiked) {
@@ -80,7 +85,10 @@ function Main() {
 
   return (
     <>
-      <Profile onAddCardSubmit={handleAddCard}></Profile>
+      <Profile
+        onAddCardSubmit={handleAddCard}
+        onUserLogin={handleUserLogin}
+      ></Profile>
       <main className="destinations page__destinations">
         <ul className="destinations__list">
           {cards.map((card, i) => (
@@ -93,7 +101,7 @@ function Main() {
                 cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
-                onDeleteClick={handleCardDeleteClick}
+                showDeleteButton={card.owner._id === userId}
               ></Card>
             </li>
           ))}

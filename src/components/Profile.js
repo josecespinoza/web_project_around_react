@@ -5,7 +5,7 @@ import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../utils/api";
 
-function Profile({ onAddCardSubmit }) {
+function Profile({ onAddCardSubmit, onUserLogin }) {
   const [userInfo, setUserInfo] = useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -15,6 +15,7 @@ function Profile({ onAddCardSubmit }) {
     api.configRequest({ resource: "users/me" });
     api.get().then((res) => {
       setUserInfo(res);
+      onUserLogin({ userId: res._id });
     });
   }, []);
 
