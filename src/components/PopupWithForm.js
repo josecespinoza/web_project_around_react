@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
+import { PopupWithFormContext } from "./PopupWithFormContext";
 import Popup from "./Popup";
 
 function PopupWithForm({ children, onClose, onSubmit }) {

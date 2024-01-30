@@ -1,7 +1,7 @@
-import Form from "../common/Form";
-import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
+import Form from "./Form";
+import { PopupWithFormContext } from "./PopupWithFormContext";
 import { useContext, useState } from "react";
-import { api } from "../../utils/api";
+import { api } from "../utils/api";
 
 function CardDeleteForm({ cardId }) {
   const [buttonLabel, setButtonLabel] = useState("Sí");

@@ -1,11 +1,10 @@
-import InputSet from "../common/InputSet";
-import Form from "../common/Form";
 import { useState, useContext } from "react";
-import { api } from "../../utils/api";
-import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
+import InputSet from "./InputSet";
+import Form from "./Form";
+import { api } from "../utils/api";
+import { PopupWithFormContext } from "./PopupWithFormContext";
 
-function AddCardForm() {
-  const [title, setTitle] = useState("");
+function EditAvatarForm() {
   const [imageUrl, setImageUrl] = useState("");
   const [buttonLabel, setButtonLabel] = useState("Guardar");
 
@@ -14,11 +13,11 @@ function AddCardForm() {
   function handleFormSubmit(evt) {
     setButtonLabel("Guardando...");
     api.configRequest({
-      resource: "/cards",
-      body: { name: title, link: imageUrl },
+      resource: "/users/me/avatar",
+      body: { avatar: imageUrl },
     });
     api
-      .post()
+      .patch()
       .then((res) => {
         handleSubmit(res);
       })
@@ -26,35 +25,25 @@ function AddCardForm() {
   }
 
   function handleChange(inputName, inputValue) {
-    inputName === "title" && setTitle(inputValue);
-    inputName === "imageUrl" && setImageUrl(inputValue);
+    inputName === "avatarUrl" && setImageUrl(inputValue);
   }
 
   return (
     <Form
-      title="Nuevo Lugar"
+      title="Cambiar foto de perfil"
       buttonLabel={buttonLabel}
       onFormSubmit={handleFormSubmit}
     >
       <InputSet
-        type="text"
-        name="title"
-        placeholder="Título"
-        maxlength="30"
-        minlength="2"
-        required={true}
-        onChange={handleChange}
-      ></InputSet>
-      <InputSet
         type="url"
-        name="imageUrl"
+        name="avatarUrl"
         placeholder="Enlace a la imagen"
+        required="true"
         maxlength="500"
-        required={true}
         onChange={handleChange}
       ></InputSet>
     </Form>
   );
 }
 
-export default AddCardForm;
+export default EditAvatarForm;

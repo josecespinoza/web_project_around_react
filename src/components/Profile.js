@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import PopupWithForm from "../common/PopupWithForm";
+import PopupWithForm from "./PopupWithForm";
 import ProfileForm from "./ProfileForm";
 import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";
-import { api } from "../../utils/api";
+import { api } from "../utils/api";
 
 function Profile({ onAddCardSubmit }) {
   const [userInfo, setUserInfo] = useState({});

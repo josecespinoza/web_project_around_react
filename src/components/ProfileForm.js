@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import InputSet from "../common/InputSet";
-import Form from "../common/Form";
-import { api } from "../../utils/api";
-import { PopupWithFormContext } from "../contexts/PopupWithFormContext";
+import InputSet from "./InputSet";
+import Form from "./Form";
+import { api } from "../utils/api";
+import { PopupWithFormContext } from "./PopupWithFormContext";
 
 function ProfileForm() {
   const [userName, setUserName] = useState("");
