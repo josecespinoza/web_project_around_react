@@ -27,6 +27,7 @@ function Card({
         className="destination__photo"
         src={imageLink}
         onClick={handleClick}
+        alt={name}
       />
       {showDeleteButton && (
         <button

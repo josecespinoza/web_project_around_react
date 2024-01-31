@@ -37,14 +37,9 @@ function Main() {
     setCards((prevCards) => [newCard].concat([...prevCards]));
   }
 
-  function handleCardDeleteClick(cardId) {
-    setIsCardDeleteOpened(true);
-    setSelectedCard({ id: cardId });
-  }
-
   function handleCardDelete(cardId) {
     setIsCardDeleteOpened(false);
-    setCards((prevCards) => prevCards.filter((card) => card._id != cardId));
+    setCards((prevCards) => prevCards.filter((card) => card._id !== cardId));
   }
 
   function handleUserLogin({ userId }) {

@@ -19,7 +19,7 @@ function ImagePopup({ name, imageLink, onClose }) {
       isOpen={isOpen}
       afterClose={handleClose}
     >
-      <img className="popup__photo" src={imageLink} />
+      <img className="popup__photo" alt={name} src={imageLink} />
       <p className="popup__description">{name}</p>
     </Popup>
   );
