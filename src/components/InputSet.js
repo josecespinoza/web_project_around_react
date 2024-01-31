@@ -6,6 +6,7 @@ function InputSet({
   minLength,
   required = false,
   onChange,
+  value,
 }) {
   function handleChange(evt) {
     onChange(evt.target.name, evt.target.value);
@@ -22,6 +23,7 @@ function InputSet({
         minLength={minLength}
         required={required}
         onChange={handleChange}
+        value={value}
       />
       <span className="form__input-error"></span>
     </fieldset>

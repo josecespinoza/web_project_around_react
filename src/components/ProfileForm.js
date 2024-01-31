@@ -1,15 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InputSet from "./InputSet";
 import Form from "./Form";
 import { api } from "../utils/api";
 import { PopupWithFormContext } from "./PopupWithFormContext";
 
-function ProfileForm() {
+function ProfileForm({ currentUser }) {
   const [userName, setUserName] = useState("");
   const [aboutMe, setAboutMe] = useState("");
   const [buttonLabel, setButtonLabel] = useState("Guardar");
 
   const handleSubmit = useContext(PopupWithFormContext);
+
+  useEffect(() => {
+    if (currentUser) {
+      setUserName(currentUser.name);
+      setAboutMe(currentUser.about);
+    }
+  }, []);
 
   function handleFormSubmit(evt) {
     setButtonLabel("Guardando...");
@@ -43,6 +50,7 @@ function ProfileForm() {
         minLength="2"
         required={true}
         onChange={handleChange}
+        value={userName}
       ></InputSet>
       <InputSet
         type="text"
@@ -52,6 +60,7 @@ function ProfileForm() {
         minLength="2"
         required={true}
         onChange={handleChange}
+        value={aboutMe}
       ></InputSet>
     </Form>
   );

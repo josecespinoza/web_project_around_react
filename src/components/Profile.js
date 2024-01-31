@@ -93,7 +93,7 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
           onSubmit={handleEditProfileSubmit}
           onClose={handleFormClose}
         >
-          <ProfileForm></ProfileForm>
+          <ProfileForm currentUser={userInfo}></ProfileForm>
         </PopupWithForm>
       )}
       {isAddPlacePopupOpen && (
