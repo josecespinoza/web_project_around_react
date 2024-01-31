@@ -46,8 +46,13 @@ function Main() {
     setUserId(userId);
   }
 
+  function isLikedByCurrentUser(cardId) {
+    const currentCard = cards.find((card) => card._id === cardId);
+    return currentCard.likes.some((user) => user._id === userId);
+  }
+
   function handleCardLike(cardId, isLiked) {
-    if (!isLiked) {
+    if (!isLiked || !isLikedByCurrentUser(cardId)) {
       api.configRequest({
         resource: `/cards/likes/${cardId}`,
       });
