@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import ProfileForm from "./ProfileForm";
 import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../utils/api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Profile({ onAddCardSubmit, onUserLogin }) {
   const [userInfo, setUserInfo] = useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     api.configRequest({ resource: "users/me" });
@@ -66,12 +69,12 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
             id="image-avatar"
             className="profile__avatar"
             alt="Profile avatar"
-            src={userInfo.avatar}
+            src={currentUser.avatar}
           />
         </div>
         <div className="profile__info">
-          <h1 className="profile__name">{userInfo.name}</h1>
-          <h2 className="profile__occupation">{userInfo.about}</h2>
+          <h1 className="profile__name">{currentUser.name}</h1>
+          <h2 className="profile__occupation">{currentUser.about}</h2>
           <button
             className="button button_theme_dark button_action_edit button_location_profile-info"
             onClick={handleEditProfileClick}
@@ -93,7 +96,7 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
           onSubmit={handleEditProfileSubmit}
           onClose={handleFormClose}
         >
-          <ProfileForm currentUser={userInfo}></ProfileForm>
+          <ProfileForm currentUser={currentUser}></ProfileForm>
         </PopupWithForm>
       )}
       {isAddPlacePopupOpen && (

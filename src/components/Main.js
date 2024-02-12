@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { api } from "../utils/api";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
