@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import { api } from "./utils/api";
+import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -21,9 +22,11 @@ function App() {
 
   return (
     <div className="page page_theme_dark">
-      <Header></Header>
-      <Main></Main>
-      <Footer></Footer>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header></Header>
+        <Main></Main>
+        <Footer></Footer>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
