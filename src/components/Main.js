@@ -101,7 +101,7 @@ function Main() {
                 cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
-                showDeleteButton={card.owner._id === userId}
+                card={card}
               ></Card>
             </li>
           ))}
