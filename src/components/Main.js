@@ -42,6 +42,11 @@ function Main() {
     setCards((prevCards) => prevCards.filter((card) => card._id !== cardId));
   }
 
+  function handleCardDeleteClick(cardId) {
+    setIsCardDeleteOpened(true);
+    setSelectedCard({ id: cardId });
+  }
+
   function handleUserLogin({ userId }) {
     setUserId(userId);
   }
@@ -101,6 +106,7 @@ function Main() {
                 cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
+                onDeleteClick={handleCardDeleteClick}
                 card={card}
               ></Card>
             </li>
