@@ -22,4 +22,16 @@ api.changeLikeCardStatus = (cardId, isLike) => {
   return api.put();
 };
 
+api.deleteCard = (cardId) => {
+  api.configRequest({
+    resource: `/cards/${cardId}`,
+  });
+  return api.delete();
+};
+
+api.loadCards = () => {
+  api.configRequest({ resource: "cards" });
+  return api.get();
+};
+
 export { api };

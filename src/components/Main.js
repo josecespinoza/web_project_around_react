@@ -17,13 +17,15 @@ function Main() {
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    api.configRequest({ resource: "cards" });
-    api.get().then((res) => {
-      setCards(res);
-    });
+    api
+      .loadCards()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch(console.error("Couldn't load cards"));
   }, []);
 
-  function handleCardClick({ name, imageLink }) {
+  function handleCardClick(name, imageLink) {
     setIsCardPopupOpened(true);
     setSelectedCard({
       name,
@@ -76,14 +78,10 @@ function Main() {
           {cards.map((card, i) => (
             <li key={i} className="destinations__item">
               <Card
-                id={card._id}
-                name={card.name}
-                imageLink={card.link}
-                onCardClick={handleCardClick}
-                likesCounter={card.likes.length}
-                onLike={handleCardLike}
-                onDeleteClick={handleCardDeleteClick}
                 card={card}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDeleteClick}
               ></Card>
             </li>
           ))}

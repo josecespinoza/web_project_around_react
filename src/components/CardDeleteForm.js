@@ -10,12 +10,8 @@ function CardDeleteForm({ cardId }) {
 
   function handleFormSubmit() {
     setButtonLabel("Eliminando...");
-    api.configRequest({
-      resource: `/cards/${cardId}`,
-    });
-    api
-      .delete()
-      .then((res) => {
+    api.deleteCard
+      .then(() => {
         handleSubmit(cardId);
       })
       .catch(console.error("There was an error"));
