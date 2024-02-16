@@ -5,7 +5,6 @@ function Card({
   id,
   name,
   imageLink,
-  cardIsLiked,
   likesCounter,
   onCardClick,
   onLike,
@@ -14,14 +13,15 @@ function Card({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = currentUser.id === card.owner._id;
+  const isOwn = currentUser._id === card.owner._id;
+  const isLiked = card.likes.some((user) => user._id === currentUser._id);
 
   function handleClick() {
     onCardClick({ name, imageLink });
   }
 
-  function handleLike() {
-    onLike(id, cardIsLiked);
+  function handleLikeClick() {
+    onLike(card, isLiked);
   }
 
   function handleDelete() {
@@ -49,11 +49,11 @@ function Card({
         <div className="like destination__like">
           <button
             className="button button_theme_dark button_action_like"
-            onClick={handleLike}
+            onClick={handleLikeClick}
           >
             <span
               className={`button__icon button__icon_action_${
-                cardIsLiked ? "liked" : "like"
+                isLiked ? "liked" : "like"
               }`}
             ></span>
           </button>

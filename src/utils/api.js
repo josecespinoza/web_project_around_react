@@ -9,4 +9,17 @@ api.getUserInfo = () => {
   return api.get();
 };
 
+api.changeLikeCardStatus = (cardId, isLike) => {
+  if (!isLike) {
+    api.configRequest({
+      resource: `/cards/likes/${cardId}`,
+    });
+    return api.delete();
+  }
+  api.configRequest({
+    resource: `/cards/likes/${cardId}`,
+  });
+  return api.put();
+};
+
 export { api };

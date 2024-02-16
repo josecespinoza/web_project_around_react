@@ -15,7 +15,7 @@ function App() {
         about: res.about,
         avatar: res.avatar,
         name: res.name,
-        id: res._id,
+        _id: res._id,
       });
     });
   }, []);

@@ -5,6 +5,7 @@ import ImagePopup from "./ImagePopup";
 import Profile from "./Profile";
 import PopupWithForm from "./PopupWithForm";
 import CardDeleteForm from "./CardDeleteForm";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main() {
   const [cards, setCards] = useState([]);
@@ -12,6 +13,8 @@ function Main() {
   const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
   const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
   const [userId, setUserId] = useState("");
+
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     api.configRequest({ resource: "cards" });
@@ -51,41 +54,15 @@ function Main() {
     setUserId(userId);
   }
 
-  function isLikedByCurrentUser(cardId) {
-    const currentCard = cards.find((card) => card._id === cardId);
-    return currentCard.likes.some((user) => user._id === userId);
-  }
-
-  function handleCardLike(cardId, isLiked) {
-    if (!isLiked || !isLikedByCurrentUser(cardId)) {
-      api.configRequest({
-        resource: `/cards/likes/${cardId}`,
-      });
-      api.put().then((newLikedCard) => {
-        setCards((prevCards) => {
-          return prevCards.map((card) => {
-            if (card._id === newLikedCard._id) {
-              return newLikedCard;
-            }
-            return card;
-          });
-        });
-      });
-    } else {
-      api.configRequest({
-        resource: `/cards/likes/${cardId}`,
-      });
-      api.delete().then((newLikedCard) => {
-        setCards((prevCards) => {
-          return prevCards.map((card) => {
-            if (card._id === newLikedCard._id) {
-              return newLikedCard;
-            }
-            return card;
-          });
-        });
-      });
-    }
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    api.changeLikeCardStatus(card._id, !isLiked).then((newLikedCard) => {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card._id === newLikedCard._id ? newLikedCard : card
+        )
+      );
+    });
   }
 
   return (
@@ -103,7 +80,6 @@ function Main() {
                 name={card.name}
                 imageLink={card.link}
                 onCardClick={handleCardClick}
-                cardIsLiked={card.likes.length > 0}
                 likesCounter={card.likes.length}
                 onLike={handleCardLike}
                 onDeleteClick={handleCardDeleteClick}
