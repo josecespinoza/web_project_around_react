@@ -1,11 +1,11 @@
 import { useRef, useEffect } from "react";
 
-function Popup({ children, onClose, type, isOpen, afterClose = null }) {
+function Popup({ children, type, isOpen, onCloseClick, onClose = null }) {
   const ref = useRef();
 
   useEffect(() => {
     ref.current.focus();
-    !isOpen && closingAnimation();
+    !isOpen && handleClose();
   }, [isOpen]);
 
   function isCloseEvent(evt) {
@@ -14,18 +14,18 @@ function Popup({ children, onClose, type, isOpen, afterClose = null }) {
     );
   }
 
-  //Will animate popup closing and trigger afterClose function
-  function closingAnimation() {
+  //Will wait for popup closing animation to end and trigger afterClose function
+  function handleClose() {
     setTimeout(() => {
-      afterClose && afterClose();
+      onClose && onClose();
     }, 300);
   }
 
-  function handleClose(evt) {
+  function handleCloseClick(evt) {
     if (!isCloseEvent(evt)) {
       return;
     }
-    onClose();
+    onCloseClick();
   }
 
   return (
@@ -33,7 +33,7 @@ function Popup({ children, onClose, type, isOpen, afterClose = null }) {
       ref={ref}
       className={`popup popup_state_${isOpen ? "opened" : "closed"}`}
       tabIndex="10"
-      onKeyUp={handleClose}
+      onKeyUp={handleCloseClick}
     >
       <div className={`popup__content popup__content_type_${type}`}>
         {children}
@@ -41,12 +41,12 @@ function Popup({ children, onClose, type, isOpen, afterClose = null }) {
       <div className="popup__close-button">
         <button
           className="button button_theme_dark button_action_close"
-          onClick={handleClose}
+          onClick={handleCloseClick}
         >
           <span className="button__icon button__icon_action_close"></span>
         </button>
       </div>
-      <div className="popup__backdrop" onClick={handleClose}></div>
+      <div className="popup__backdrop" onClick={handleCloseClick}></div>
     </div>
   );
 }

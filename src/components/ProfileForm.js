@@ -9,7 +9,7 @@ function ProfileForm({ currentUser }) {
   const [aboutMe, setAboutMe] = useState("");
   const [buttonLabel, setButtonLabel] = useState("Guardar");
 
-  const handleSubmit = useContext(PopupWithFormContext);
+  const handleFormSubmit = useContext(PopupWithFormContext);
 
   useEffect(() => {
     if (currentUser) {
@@ -18,7 +18,7 @@ function ProfileForm({ currentUser }) {
     }
   }, []);
 
-  function handleFormSubmit(evt) {
+  function handleSubmit(evt) {
     setButtonLabel("Guardando...");
     api.configRequest({
       resource: "users/me",
@@ -27,7 +27,7 @@ function ProfileForm({ currentUser }) {
     api
       .patch()
       .then((res) => {
-        handleSubmit(res);
+        handleFormSubmit(res);
       })
       .catch(console.error("There was an error"));
   }
@@ -40,7 +40,7 @@ function ProfileForm({ currentUser }) {
     <Form
       title="Editar Perfil"
       buttonLabel={buttonLabel}
-      onFormSubmit={handleFormSubmit}
+      onFormSubmit={handleSubmit}
     >
       <InputSet
         type="text"

@@ -4,20 +4,20 @@ import Popup from "./Popup";
 function ImagePopup({ name, imageLink, onClose }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  function handlePopup() {
+  function handleCloseClick() {
     setIsOpen(false);
   }
 
-  function handleClose() {
+  function handlePopupClose() {
     onClose();
   }
 
   return (
     <Popup
-      onClose={handlePopup}
       type="image"
       isOpen={isOpen}
-      afterClose={handleClose}
+      onCloseClick={handleCloseClick}
+      onClose={handlePopupClose}
     >
       <img className="popup__photo" alt={name} src={imageLink} />
       <p className="popup__description">{name}</p>

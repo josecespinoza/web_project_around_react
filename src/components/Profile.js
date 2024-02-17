@@ -5,6 +5,7 @@ import AddCardForm from "./AddCardForm";
 import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 function Profile({ onAddCardSubmit, onUserLogin }) {
   const [userInfo, setUserInfo] = useState({});
@@ -27,21 +28,21 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
   }
 
   function handleEditProfileSubmit(submitRes) {
-    handleFormClose();
+    closeAllPopups();
     setUserInfo(submitRes);
   }
 
   function handleEditAvatarSubmit(submitRes) {
-    handleFormClose();
+    closeAllPopups();
     setUserInfo(submitRes);
   }
 
   function handleAddCardSubmit(submitRes) {
-    handleFormClose();
+    closeAllPopups();
     onAddCardSubmit(submitRes);
   }
 
-  function handleFormClose() {
+  function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -92,22 +93,21 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
         </div>
       </section>
       {isEditProfilePopupOpen && (
-        <PopupWithForm
+        <EditProfilePopup
           onSubmit={handleEditProfileSubmit}
-          onClose={handleFormClose}
-        >
-          <ProfileForm currentUser={currentUser}></ProfileForm>
-        </PopupWithForm>
+          onClose={closeAllPopups}
+        ></EditProfilePopup>
       )}
+
       {isAddPlacePopupOpen && (
-        <PopupWithForm onSubmit={handleAddCardSubmit} onClose={handleFormClose}>
+        <PopupWithForm onSubmit={handleAddCardSubmit} onClose={closeAllPopups}>
           <AddCardForm></AddCardForm>
         </PopupWithForm>
       )}
       {isEditAvatarPopupOpen && (
         <PopupWithForm
           onSubmit={handleEditAvatarSubmit}
-          onClose={handleFormClose}
+          onClose={closeAllPopups}
         >
           <EditAvatarForm></EditAvatarForm>
         </PopupWithForm>
