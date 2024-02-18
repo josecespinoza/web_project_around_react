@@ -6,6 +6,7 @@ import EditAvatarForm from "./EditAvatarForm";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function Profile({ onAddCardSubmit, onUserLogin }) {
   const [userInfo, setUserInfo] = useState({});
@@ -13,7 +14,7 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     api.configRequest({ resource: "users/me" });
@@ -29,12 +30,12 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
 
   function handleEditProfileSubmit(submitRes) {
     closeAllPopups();
-    setUserInfo(submitRes);
+    setCurrentUser(submitRes);
   }
 
   function handleEditAvatarSubmit(submitRes) {
     closeAllPopups();
-    setUserInfo(submitRes);
+    setCurrentUser(submitRes);
   }
 
   function handleAddCardSubmit(submitRes) {
@@ -103,14 +104,19 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
           <AddCardForm></AddCardForm>
         </PopupWithForm>
       )}
-      {isEditAvatarPopupOpen && (
+      {/* {isEditAvatarPopupOpen && (
         <PopupWithForm
           onSubmit={handleEditAvatarSubmit}
           onClose={closeAllPopups}
         >
           <EditAvatarForm></EditAvatarForm>
         </PopupWithForm>
-      )}
+      )} */}
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onSubmit={handleEditAvatarSubmit}
+        onClose={closeAllPopups}
+      ></EditAvatarPopup>
     </>
   );
 }

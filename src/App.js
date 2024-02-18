@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="page page_theme_dark">
-      <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
         <Header></Header>
         <Main></Main>
         <Footer></Footer>

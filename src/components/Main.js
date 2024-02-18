@@ -14,7 +14,7 @@ function Main() {
   const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
   const [userId, setUserId] = useState("");
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     api
