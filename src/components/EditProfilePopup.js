@@ -1,15 +1,20 @@
 import PopupWithForm from "./PopupWithForm";
 import ProfileForm from "./ProfileForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useState } from "react";
 
-function EditProfilePopup({ onClose, onSubmit }) {
+function EditProfilePopup({ isOpen, onClose, onSubmit }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <PopupWithForm onClose={onClose} onSubmit={onSubmit}>
-      <ProfileForm currentUser={currentUser}></ProfileForm>
-    </PopupWithForm>
+    <>
+      {isOpen && (
+        <PopupWithForm isOpen={isOpen} onClose={onClose} onSubmit={onSubmit}>
+          <ProfileForm currentUser={currentUser}></ProfileForm>
+        </PopupWithForm>
+      )}
+    </>
   );
 }
 

@@ -2,35 +2,39 @@ import { useState } from "react";
 import { PopupWithFormContext } from "./PopupWithFormContext";
 import Popup from "./Popup";
 
-function PopupWithForm({ children, onClose, onSubmit }) {
+function PopupWithForm({ children, isOpen, onClose, onSubmit }) {
   const [submitRes, setSubmitRes] = useState(null);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
-  /*Passed as context to children and triggered from them*/
+  /*Passed as context to children forms*/
   function handleFormSubmit(res) {
     setSubmitRes(res);
-    setIsOpen(false);
-  }
-
-  function handleCloseClick() {
-    setIsOpen(false);
+    setIsPopupOpen(false);
   }
 
   function handlePopupClose() {
     submitRes ? onSubmit(submitRes) : onClose();
   }
 
+  function handlePopupCloseClick() {
+    setIsPopupOpen(false);
+  }
+
   return (
-    <Popup
-      isOpen={isOpen}
-      type="form"
-      onClose={handlePopupClose}
-      onCloseClick={handleCloseClick}
-    >
-      <PopupWithFormContext.Provider value={handleFormSubmit}>
-        {children}
-      </PopupWithFormContext.Provider>
-    </Popup>
+    <>
+      {isOpen && (
+        <Popup
+          isPopupOpen={isPopupOpen}
+          type="form"
+          onCloseClick={handlePopupCloseClick}
+          onClose={handlePopupClose}
+        >
+          <PopupWithFormContext.Provider value={handleFormSubmit}>
+            {children}
+          </PopupWithFormContext.Provider>
+        </Popup>
+      )}
+    </>
   );
 }
 

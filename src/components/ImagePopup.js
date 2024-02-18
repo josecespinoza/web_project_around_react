@@ -2,20 +2,20 @@ import { useState } from "react";
 import Popup from "./Popup";
 
 function ImagePopup({ name, imageLink, onClose }) {
-  const [isOpen, setIsOpen] = useState(true);
-
-  function handleCloseClick() {
-    setIsOpen(false);
-  }
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   function handlePopupClose() {
     onClose();
   }
 
+  function handleCloseClick() {
+    setIsPopupOpen(false);
+  }
+
   return (
     <Popup
+      isPopupOpen={isPopupOpen}
       type="image"
-      isOpen={isOpen}
       onCloseClick={handleCloseClick}
       onClose={handlePopupClose}
     >

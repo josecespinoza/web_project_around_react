@@ -92,12 +92,11 @@ function Profile({ onAddCardSubmit, onUserLogin }) {
           </button>
         </div>
       </section>
-      {isEditProfilePopupOpen && (
-        <EditProfilePopup
-          onSubmit={handleEditProfileSubmit}
-          onClose={closeAllPopups}
-        ></EditProfilePopup>
-      )}
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onSubmit={handleEditProfileSubmit}
+        onClose={closeAllPopups}
+      ></EditProfilePopup>
 
       {isAddPlacePopupOpen && (
         <PopupWithForm onSubmit={handleAddCardSubmit} onClose={closeAllPopups}>
