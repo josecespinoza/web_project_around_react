@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/web_project_around_react/static/css/main.0e9dbb4a.css",
-    "main.js": "/web_project_around_react/static/js/main.fc7d763e.js",
+    "main.js": "/web_project_around_react/static/js/main.7f981741.js",
     "static/js/787.bf20448d.chunk.js": "/web_project_around_react/static/js/787.bf20448d.chunk.js",
     "static/media/Inter-Medium.woff?v=3.19": "/web_project_around_react/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Black.woff?v=3.19": "/web_project_around_react/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -17,11 +17,11 @@
     "static/media/edit-symbol.svg": "/web_project_around_react/static/media/edit-symbol.6c7bf05444b9793fdf6e.svg",
     "static/media/plus-symbol.svg": "/web_project_around_react/static/media/plus-symbol.bed8c136e13907f5eefb.svg",
     "main.0e9dbb4a.css.map": "/web_project_around_react/static/css/main.0e9dbb4a.css.map",
-    "main.fc7d763e.js.map": "/web_project_around_react/static/js/main.fc7d763e.js.map",
+    "main.7f981741.js.map": "/web_project_around_react/static/js/main.7f981741.js.map",
     "787.bf20448d.chunk.js.map": "/web_project_around_react/static/js/787.bf20448d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0e9dbb4a.css",
-    "static/js/main.fc7d763e.js"
+    "static/js/main.7f981741.js"
   ]
 }
