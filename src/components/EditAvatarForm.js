@@ -18,12 +18,8 @@ function EditAvatarForm({ currentUser }) {
 
   function handleFormSubmit(evt) {
     setButtonLabel("Guardando...");
-    api.configRequest({
-      resource: "/users/me/avatar",
-      body: { avatar: imageUrl },
-    });
     api
-      .patch()
+      .setUserAvatar(imageUrl)
       .then((res) => {
         handleSubmit(res);
       })

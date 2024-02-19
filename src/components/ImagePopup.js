@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Popup from "./Popup";
 
-function ImagePopup({ name, imageLink, onClose }) {
+function ImagePopup({ onClose, card }) {
   const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   function handlePopupClose() {
@@ -13,15 +13,17 @@ function ImagePopup({ name, imageLink, onClose }) {
   }
 
   return (
-    <Popup
-      isPopupOpen={isPopupOpen}
-      type="image"
-      onCloseClick={handleCloseClick}
-      onClose={handlePopupClose}
-    >
-      <img className="popup__photo" alt={name} src={imageLink} />
-      <p className="popup__description">{name}</p>
-    </Popup>
+    <>
+      <Popup
+        isPopupOpen={isPopupOpen}
+        type="image"
+        onCloseClick={handleCloseClick}
+        onClose={handlePopupClose}
+      >
+        <img className="popup__photo" alt={card.name} src={card.link} />
+        <p className="popup__description">{card.name}</p>
+      </Popup>
+    </>
   );
 }
 

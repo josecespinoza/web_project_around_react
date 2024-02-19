@@ -13,12 +13,8 @@ function AddCardForm() {
 
   function handleFormSubmit(evt) {
     setButtonLabel("Guardando...");
-    api.configRequest({
-      resource: "/cards",
-      body: { name: title, link: imageUrl },
-    });
     api
-      .post()
+      .addCard(title, imageUrl)
       .then((res) => {
         handleSubmit(res);
       })

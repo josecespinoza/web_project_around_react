@@ -10,7 +10,8 @@ function CardDeleteForm({ cardId }) {
 
   function handleFormSubmit() {
     setButtonLabel("Eliminando...");
-    api.deleteCard
+    api
+      .deleteCard(cardId)
       .then(() => {
         handleSubmit(cardId);
       })

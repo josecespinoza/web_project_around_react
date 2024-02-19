@@ -9,6 +9,22 @@ api.getUserInfo = () => {
   return api.get();
 };
 
+api.setUserInfo = (name, about) => {
+  api.configRequest({
+    resource: "users/me",
+    body: { name, about },
+  });
+  return api.patch();
+};
+
+api.setUserAvatar = (imageUrl) => {
+  api.configRequest({
+    resource: "/users/me/avatar",
+    body: { avatar: imageUrl },
+  });
+  return api.patch();
+};
+
 api.changeLikeCardStatus = (cardId, isLike) => {
   if (!isLike) {
     api.configRequest({
@@ -22,6 +38,14 @@ api.changeLikeCardStatus = (cardId, isLike) => {
   return api.put();
 };
 
+api.addCard = (title, imageUrl) => {
+  api.configRequest({
+    resource: "/cards",
+    body: { name: title, link: imageUrl },
+  });
+  return api.post();
+};
+
 api.deleteCard = (cardId) => {
   api.configRequest({
     resource: `/cards/${cardId}`,
@@ -29,7 +53,7 @@ api.deleteCard = (cardId) => {
   return api.delete();
 };
 
-api.loadCards = () => {
+api.getCardList = () => {
   api.configRequest({ resource: "cards" });
   return api.get();
 };

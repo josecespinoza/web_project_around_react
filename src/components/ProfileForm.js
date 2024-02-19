@@ -20,12 +20,8 @@ function ProfileForm({ currentUser }) {
 
   function handleSubmit(evt) {
     setButtonLabel("Guardando...");
-    api.configRequest({
-      resource: "users/me",
-      body: { name: userName, about: aboutMe },
-    });
     api
-      .patch()
+      .setUserInfo(userName, aboutMe)
       .then((res) => {
         handleFormSubmit(res);
       })

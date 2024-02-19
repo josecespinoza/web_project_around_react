@@ -1,36 +1,18 @@
-import { useState, useEffect, useContext } from "react";
-import { api } from "../utils/api";
+import { useState } from "react";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
-import Profile from "./Profile";
 import PopupWithForm from "./PopupWithForm";
 import CardDeleteForm from "./CardDeleteForm";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import DeleteCardPopup from "./DeleteCardPopup";
 
-function Main() {
-  const [cards, setCards] = useState([]);
+function Main({ cards, onCardLike, onCardDelete }) {
   const [selectedCard, setSelectedCard] = useState({});
   const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
   const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
-  const [userId, setUserId] = useState("");
 
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    api
-      .loadCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.error("Couldn't load cards"));
-  }, []);
-
-  function handleCardClick(name, imageLink) {
+  function handleCardClick(card) {
     setIsCardPopupOpened(true);
-    setSelectedCard({
-      name,
-      imageLink,
-    });
+    setSelectedCard(card);
   }
 
   function handlePopupCardClose() {
@@ -38,41 +20,17 @@ function Main() {
     setIsCardDeleteOpened(false);
   }
 
-  function handleAddCard(newCard) {
-    setCards((prevCards) => [newCard].concat([...prevCards]));
-  }
-
-  function handleCardDelete(cardId) {
-    setIsCardDeleteOpened(false);
-    setCards((prevCards) => prevCards.filter((card) => card._id !== cardId));
-  }
-
-  function handleCardDeleteClick(cardId) {
+  function handleCardDelete(card) {
     setIsCardDeleteOpened(true);
-    setSelectedCard({ id: cardId });
-  }
-
-  function handleUserLogin({ userId }) {
-    setUserId(userId);
+    setSelectedCard(card);
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newLikedCard) => {
-      setCards((prevCards) =>
-        prevCards.map((card) =>
-          card._id === newLikedCard._id ? newLikedCard : card
-        )
-      );
-    });
+    onCardLike(card);
   }
 
   return (
     <>
-      <Profile
-        onAddCardSubmit={handleAddCard}
-        onUserLogin={handleUserLogin}
-      ></Profile>
       <main className="destinations page__destinations">
         <ul className="destinations__list">
           {cards.map((card, i) => (
@@ -81,7 +39,7 @@ function Main() {
                 card={card}
                 onCardClick={handleCardClick}
                 onCardLike={handleCardLike}
-                onCardDelete={handleCardDeleteClick}
+                onCardDelete={handleCardDelete}
               ></Card>
             </li>
           ))}
@@ -90,18 +48,15 @@ function Main() {
       {isCardPopupOpened && (
         <ImagePopup
           onClose={handlePopupCardClose}
-          name={selectedCard.name}
-          imageLink={selectedCard.imageLink}
+          card={selectedCard}
         ></ImagePopup>
       )}
-      {isCardDeleteOpened && (
-        <PopupWithForm
-          onClose={handlePopupCardClose}
-          onSubmit={handleCardDelete}
-        >
-          <CardDeleteForm cardId={selectedCard.id}></CardDeleteForm>
-        </PopupWithForm>
-      )}
+      <DeleteCardPopup
+        isOpen={isCardDeleteOpened}
+        onSubmit={onCardDelete}
+        onClose={handlePopupCardClose}
+        cardId={selectedCard._id}
+      ></DeleteCardPopup>
     </>
   );
 }

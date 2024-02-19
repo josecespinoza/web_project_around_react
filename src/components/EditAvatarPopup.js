@@ -5,7 +5,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
   const { currentUser } = useContext(CurrentUserContext);
-
   return (
     <>
       {isOpen && (
