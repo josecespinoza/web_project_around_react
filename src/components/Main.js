@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
-import CardDeleteForm from "./CardDeleteForm";
 import DeleteCardPopup from "./DeleteCardPopup";
 
 function Main({ cards, onCardLike, onCardDelete }) {

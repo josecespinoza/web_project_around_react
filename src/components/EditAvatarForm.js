@@ -23,7 +23,7 @@ function EditAvatarForm({ currentUser }) {
       .then((res) => {
         handleSubmit(res);
       })
-      .catch(console.error("There was an error"));
+      .catch(console.error("Couldn't set new avatar"));
   }
 
   function handleChange(inputName, inputValue) {

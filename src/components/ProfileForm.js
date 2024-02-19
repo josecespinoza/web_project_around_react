@@ -25,7 +25,7 @@ function ProfileForm({ currentUser }) {
       .then((res) => {
         handleFormSubmit(res);
       })
-      .catch(console.error("There was an error"));
+      .catch(console.error("Couldn't update user info"));
   }
 
   function handleChange(inputName, inputValue) {

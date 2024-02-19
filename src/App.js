@@ -29,14 +29,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    api.getUserInfo().then((res) => {
-      setCurrentUser({
-        about: res.about,
-        avatar: res.avatar,
-        name: res.name,
-        _id: res._id,
+    api
+      .getUserInfo()
+      .then((res) => {
+        setCurrentUser({
+          about: res.about,
+          avatar: res.avatar,
+          name: res.name,
+          _id: res._id,
+        });
+      })
+      .catch(() => {
+        console.error("Couldn't get user info");
       });
-    });
   }, []);
 
   function closeAllPopups() {
@@ -52,13 +57,18 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newLikedCard) => {
-      setCards((prevCards) =>
-        prevCards.map((card) =>
-          card._id === newLikedCard._id ? newLikedCard : card
-        )
-      );
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newLikedCard) => {
+        setCards((prevCards) =>
+          prevCards.map((card) =>
+            card._id === newLikedCard._id ? newLikedCard : card
+          )
+        );
+      })
+      .catch(() => {
+        console.error("Couldn't like card");
+      });
   }
 
   /*UserOptions handlers*/

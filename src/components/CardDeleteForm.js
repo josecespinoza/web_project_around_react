@@ -15,7 +15,7 @@ function CardDeleteForm({ cardId }) {
       .then(() => {
         handleSubmit(cardId);
       })
-      .catch(console.error("There was an error"));
+      .catch(console.error("Couldn't delete card"));
   }
 
   return (
