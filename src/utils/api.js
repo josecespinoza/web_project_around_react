@@ -69,4 +69,4 @@ api.getCardList = () => {
   return api.get();
 };
 
-export { api };
+export default api;

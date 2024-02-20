@@ -1,7 +1,7 @@
 import InputSet from "./InputSet";
 import Form from "./Form";
 import { useState, useContext } from "react";
-import { api } from "../utils/api";
+import api from "../utils/api";
 import { PopupWithFormContext } from "./PopupWithFormContext";
 
 function AddCardForm() {

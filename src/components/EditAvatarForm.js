@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import InputSet from "./InputSet";
 import Form from "./Form";
-import { api } from "../utils/api";
+import api from "../utils/api";
 import { PopupWithFormContext } from "./PopupWithFormContext";
 
 function EditAvatarForm({ currentUser }) {
