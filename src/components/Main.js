@@ -1,60 +1,41 @@
-import { useState } from "react";
 import Card from "./Card";
-import ImagePopup from "./ImagePopup";
-import DeleteCardPopup from "./DeleteCardPopup";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import UserOptions from "./UserOptions";
+import { useContext } from "react";
 
-function Main({ cards, onCardLike, onCardDelete }) {
-  const [selectedCard, setSelectedCard] = useState({});
-  const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
-  const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
-
-  function handleCardClick(card) {
-    setIsCardPopupOpened(true);
-    setSelectedCard(card);
-  }
-
-  function handlePopupCardClose() {
-    setIsCardPopupOpened(false);
-    setIsCardDeleteOpened(false);
-  }
-
-  function handleCardDelete(card) {
-    setIsCardDeleteOpened(true);
-    setSelectedCard(card);
-  }
-
-  function handleCardLike(card) {
-    onCardLike(card);
-  }
+function Main({
+  cards,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+  onEditProfileClick,
+  onEditAvatarClick,
+  onAddPlaceClick,
+}) {
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <>
+      <UserOptions
+        currentUser={currentUser}
+        onEditProfileClick={onEditProfileClick}
+        onEditAvatarClick={onEditAvatarClick}
+        onAddPlaceClick={onAddPlaceClick}
+      ></UserOptions>
       <main className="destinations page__destinations">
         <ul className="destinations__list">
           {cards.map((card, i) => (
             <li key={i} className="destinations__item">
               <Card
                 card={card}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                onCardClick={onCardClick}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
               ></Card>
             </li>
           ))}
         </ul>
       </main>
-      {isCardPopupOpened && (
-        <ImagePopup
-          onClose={handlePopupCardClose}
-          card={selectedCard}
-        ></ImagePopup>
-      )}
-      <DeleteCardPopup
-        isOpen={isCardDeleteOpened}
-        onSubmit={onCardDelete}
-        onClose={handlePopupCardClose}
-        cardId={selectedCard._id}
-      ></DeleteCardPopup>
     </>
   );
 }

@@ -9,6 +9,8 @@ import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import UserOptions from "./UserOptions";
+import ImagePopup from "./ImagePopup";
+import DeleteCardPopup from "./DeleteCardPopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -16,6 +18,9 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [isCardPopupOpened, setIsCardPopupOpened] = useState(false);
+  const [isCardDeleteOpened, setIsCardDeleteOpened] = useState(false);
 
   useEffect(() => {
     api
@@ -48,9 +53,21 @@ function App() {
     isEditProfilePopupOpen && setIsEditProfilePopupOpen(false);
     isAddPlacePopupOpen && setIsAddPlacePopupOpen(false);
     isEditAvatarPopupOpen && setIsEditAvatarPopupOpen(false);
+    isCardPopupOpened && setIsCardPopupOpened(false);
+    isCardDeleteOpened && setIsCardDeleteOpened(false);
   }
 
   /*Cards handlers*/
+  function handleCardClick(card) {
+    setIsCardPopupOpened(true);
+    setSelectedCard(card);
+  }
+
+  function handleCardDeleteClick(card) {
+    setIsCardDeleteOpened(true);
+    setSelectedCard(card);
+  }
+
   function handleCardDelete(cardId) {
     setCards((prevCards) => prevCards.filter((card) => card._id !== cardId));
   }
@@ -105,15 +122,15 @@ function App() {
     <div className="page page_theme_dark">
       <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
         <Header></Header>
-        <UserOptions
+
+        <Main
+          cards={cards}
+          onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDeleteClick}
           onEditProfileClick={handleEditProfileClick}
           onEditAvatarClick={handleEditAvatarClick}
           onAddPlaceClick={handleAddPlaceClick}
-        ></UserOptions>
-        <Main
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
         ></Main>
         <Footer></Footer>
         <AddPlacePopup
@@ -131,6 +148,15 @@ function App() {
           onSubmit={handleEditAvatarSubmit}
           onClose={closeAllPopups}
         ></EditAvatarPopup>
+        {isCardPopupOpened && (
+          <ImagePopup onClose={closeAllPopups} card={selectedCard}></ImagePopup>
+        )}
+        <DeleteCardPopup
+          isOpen={isCardDeleteOpened}
+          onSubmit={handleCardDelete}
+          onClose={closeAllPopups}
+          cardId={selectedCard._id}
+        ></DeleteCardPopup>
       </CurrentUserContext.Provider>
     </div>
   );

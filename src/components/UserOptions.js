@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function UserOptions({
+  currentUser,
   onEditProfileClick,
   onEditAvatarClick,
   onAddPlaceClick,
 }) {
-  const { currentUser } = useContext(CurrentUserContext);
-
   return (
     <section className="profile page__profile">
       <div className="profile__avatar-mask">
