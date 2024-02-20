@@ -1,8 +1,19 @@
-import * as apiHandler from "../helpers/Api";
+import Api from "../helpers/Api.js";
 import { apiConfig } from "./config";
 
 const { address, groupId, token } = apiConfig;
-const api = apiHandler.getInstance({ address, groupId, token });
+
+let apiHandler;
+
+const getInstance = ({ address, groupId, token }) => {
+  if (!apiHandler) {
+    apiHandler = new Api({ address, groupId, token });
+  }
+  apiHandler._updateOptions({ address, groupId, token });
+  return apiHandler;
+};
+
+const api = getInstance({ address, groupId, token });
 
 api.getUserInfo = () => {
   api.configRequest({ resource: "users/me" });

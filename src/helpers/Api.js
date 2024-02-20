@@ -94,14 +94,4 @@ class Api {
   }
 }
 
-let instance;
-
-const getInstance = ({ address, groupId, token }) => {
-  if (!instance) {
-    instance = new Api({ address, groupId, token });
-  }
-  instance._updateOptions({ address, groupId, token });
-  return instance;
-};
-
-export { getInstance };
+export default Api;
